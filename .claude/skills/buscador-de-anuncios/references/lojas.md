@@ -3,6 +3,7 @@
 Padrões de URL mudam com o tempo: se uma URL de busca não funcionar, use a busca na web com `site:dominio "termo"` ou entre pela página inicial da loja. O script `scripts/urls_busca.py` gera tudo isso automaticamente.
 
 ## Índice
+0. Como acessar cada site (o que bloqueia robô)
 1. Marketplaces gerais
 2. Especializadas (por categoria)
 3. Comparadores de preço e histórico
@@ -12,6 +13,31 @@ Padrões de URL mudam com o tempo: se uma URL de busca não funcionar, use a bus
 7. Verificando se uma loja desconhecida é confiável
 
 ---
+
+## 0. Como acessar cada site (o que bloqueia robô)
+
+Teste feito em nov/2026 a partir de um servidor na nuvem (Claude Code na web), com a rede liberada para esses domínios. Várias lojas bloqueiam acessos vindos de datacenter **mesmo com navegador real** (Cloudflare, verificação de conta). Não gaste tentativas nelas: use a busca na web, que traz título, preço e trechos dos anúncios a partir do índice do buscador.
+
+| Site | Acesso direto (script/curl) | Navegador (Playwright) | Melhor caminho |
+|---|---|---|---|
+| KaBuM | ✅ busca e produto; JSON-LD completo | ✅ | `extrair_produto.py` direto |
+| AliExpress | ✅ (JSON-LD na busca) | ✅ | direto |
+| Americanas | ✅ abre (conteúdo parcial) | ✅ | direto + busca na web |
+| Buscapé / Zoom | ⚠️ HTML pesado | ✅ abre com preços | navegador |
+| Reclame Aqui | ❌ 403 | ✅ | navegador |
+| Mercado Livre | ❌ redireciona para verificação de conta | ❌ | **busca na web** (`site:mercadolivre.com.br`) |
+| OLX | ❌ Cloudflare | ❌ | **busca na web** (`site:olx.com.br`, cobre `sp.olx.com.br` etc.) |
+| Amazon | ❌ 503 / "Algo deu errado" | ❌ | **busca na web** |
+| Magalu | ❌ 403 | ❌ | **busca na web** |
+| Casas Bahia, Pichau, Terabyte, Pelando | ❌ 403 / Cloudflare | ❌ | **busca na web** |
+| Shopee | ⚠️ página vazia (tudo via JS) | ⚠️ vazia | **busca na web** |
+| Enjoei | ⚠️ abre a home, sem resultados | — | busca na web |
+
+Observações:
+- Se a sessão roda **no computador da pessoa** (IP residencial, navegador logado), esses bloqueios em geral não acontecem: prefira abrir as páginas de verdade.
+- Ferramentas de leitura de página que rodam fora do ambiente (ex.: agente `web-fetch`) podem não enxergar a rede liberada da sessão; se derem erro de DNS, não insista.
+- Quando a informação vier só da busca na web (sem abrir a página), deixe isso claro na tabela ("dados do buscador, não verificado na página") e recomende que a pessoa confira o anúncio antes de pagar.
+- Um anúncio da OLX pode ter saído do ar; o índice do buscador pode estar dias atrasado. Prefira resultados com data recente.
 
 ## 1. Marketplaces gerais
 

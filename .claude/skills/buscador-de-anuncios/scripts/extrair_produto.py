@@ -20,7 +20,11 @@ import gzip
 import html
 import json
 import re
+import signal
 import sys
+
+if hasattr(signal, "SIGPIPE"):  # permite usar com `| head` sem traceback
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 import urllib.error
 import urllib.request
 import zlib

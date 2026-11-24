@@ -66,7 +66,7 @@ Ferramentas, em ordem de preferência — use as que estiverem disponíveis na s
 3. **Script de extração** quando houver terminal com acesso à rede: `python3 scripts/extrair_produto.py URL [URL...]` — lê os dados estruturados (JSON-LD/meta tags) que a maioria das lojas embute: nome, preço, disponibilidade, nota, vendedor.
 4. **Navegador** (skills/ferramentas de browser, Playwright) quando a loja bloqueia leitores simples ou carrega tudo via JavaScript — comum em Amazon, Mercado Livre, Shopee e OLX.
 
-Se um site bloquear (captcha, 403, página vazia), não insista em loop: tente outra ferramenta, a versão mobile, o comparador de preço ou o snippet do buscador; e se ainda assim não der, marque o anúncio como **"não verificado"** em vez de supor os dados.
+Antes de tentar abrir páginas, veja a tabela "Como acessar cada site" no topo de `references/lojas.md`: Mercado Livre, OLX, Amazon, Magalu e outras bloqueiam acessos de servidores na nuvem, e para elas a busca na web é o caminho mais rápido. Se um site bloquear (captcha, 403, página vazia), não insista em loop: tente outra ferramenta, a versão mobile, o comparador de preço ou o snippet do buscador; e se ainda assim não der, marque o anúncio como **"não verificado"** em vez de supor os dados.
 
 Em cada anúncio aberto, confira:
 
